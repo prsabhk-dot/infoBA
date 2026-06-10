@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.0/css/fixedHeader.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css">
+
+<title>Info BAHP/BAST RSAB Harapan Kita 2026</title>
+
+<style>
+body{
+    
+    background-image: url('https://www.image2url.com/r2/default/images/1781078533954-a6923c1c-5d73-4f10-8258-9b4695249c1f.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family:Arial, Helvetica, sans-serif;
+    padding-top:20px;
+    position: relative;
+}
+
+
+.logo-kiri-atas {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+.logo-img {
+    height: 45px;
+    width: auto;
+}
+
+.judul{
+    text-align:center;
+    margin-bottom:25px;
+    line-height:1.2;
+}
+
+.judul-atas,
+.judul-bawah{
+    font-size:24px;
+    font-weight:500;
+    color:#2c3e50;
+}
+
+.judul-tengah{
+    font-size:32px;
+    font-weight:600;
+    color:#00828A; 
+    margin:4px 0;
+}
+
+.table-box{
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+table.dataTable thead th{
+    font-weight:600;
+}
+
+@media(max-width:768px){
+
+.logo-kiri-atas {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
+
+.logo-img {
+    height: 35px; 
+}
+
+.judul {
+    margin-top: 80px; 
+}
+
+.judul-atas,
+.judul-bawah{
+    font-size:20px;
+}
+
+.judul-tengah{
+    font-size:26px;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+
+<div class="logo-kiri-atas">
+    <img src="https://www.image2url.com/r2/default/images/1781078286848-55ddb0f7-afb6-40f7-b301-1cb9e448e7ca.png" alt="Logo Kemenkes RSAB Harapan Kita" class="logo-img">
+</div>
+
+<div class="judul">
+    <div class="judul-atas">BAHP Pengambilan</div>
+    <div class="judul-tengah">BAHP/BAST</div>
+    <div class="judul-bawah">RSAB Harapan Kita</div>
+</div>
+
+<div class="table-box">
+
+<table
+id="example"
+class="table table-striped table-bordered"
+style="width:100%">
+</table>
+
+</div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
+
+<script src="https://cdn.datatables.net/fixedheader/3.2.0/js/dataTables.fixedHeader.min.js"></script>
+
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
+
+<script>
+
+$(document).ready(function () {
+
+var table = $("#example").DataTable({
+
+ajax: {
+url: "https://script.google.com/macros/s/AKfycbybW1cYR9kb1hQTsqIFkvRjiJ7MXfZ48rOlI4K2OOiledY6EJokzPZ4BcNuNLyz8AwO/exec",
+dataSrc: function (json) {
+
+return json.data.filter(function (row) {
+
+return !isNaN(parseFloat(row.No)) &&
+       isFinite(row.No) &&
+       row.Perusahaan !== "";
+
+});
+
+}
+},
+
+columns: [
+{ title: "No", data: "No" },
+{ title: "NAMA PERUSAHAAN", data: "Perusahaan" },
+{ title: "NO. SPPB / SPK", data: "SPPB" },
+{ title: "NO. BAHP / BAST", data: "BAHP" },
+{ title: "Status BA", data: "Status" }
+],
+
+columnDefs: [
+{
+targets: 0,
+type: "num",
+render: function (data, type) {
+return type === "display" || type === "filter"
+? parseInt(data)
+: data;
+}
+}
+],
+
+order: [[0, "asc"]],
+responsive: true,
+pageLength: 10
+
+});
+
+setInterval(function(){
+table.ajax.reload(null,false);
+},30000);
+
+});
+
+</script>
+
+</body>
+</html>
