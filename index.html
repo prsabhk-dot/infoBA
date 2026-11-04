@@ -20,6 +20,15 @@
     box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+    #example tbody td:first-child {
+        color: transparent !important;
+    }
+
+    #example tbody td:first-child.dtr-control::before {
+        color: #fff !important;
+    }
+}
 body {
     background-image: url('https://www.image2url.com/r2/default/images/1781078533954-a6923c1c-5d73-4f10-8258-9b4695249c1f.jpeg');
     background-size: cover;
