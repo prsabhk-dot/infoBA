@@ -188,7 +188,7 @@ body {
 
 .judul-tengah::before,
 .judul-tengah::after {
-    content: '✦';
+    content: 'Рюд';
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -444,11 +444,30 @@ table.dataTable tbody td:last-child {
 }
 
 /* Search box styling */
+.dataTables_wrapper .dataTables_filter label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.dataTables_wrapper .dataTables_filter label i.fa-search {
+    font-size: 18px;
+    color: #00828A;
+}
+
 .dataTables_wrapper .dataTables_filter input {
     border: 2px solid #00828A;
     border-radius: 25px;
     padding: 8px 15px;
+    margin-left: 0 !important;
+    min-width: 220px;
     transition: all 0.3s ease;
+}
+
+.dataTables_wrapper .dataTables_filter input::placeholder {
+    color: #8a9aa0;
+    font-weight: 400;
 }
 
 .dataTables_wrapper .dataTables_filter input:focus {
@@ -696,7 +715,8 @@ $(document).ready(function () {
         responsive: true,
         pageLength: 10,
         language: {
-            search: "Cari:",
+            search: '<i class="fas fa-search" aria-hidden="true"></i><span class="sr-only">Cari</span>',
+            searchPlaceholder: "Cari Sesuai No. SPPB",
             lengthMenu: "Tampilkan _MENU_ data per halaman",
             info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
             infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
@@ -749,8 +769,3 @@ $(document).ready(function () {
 
 </body>
 </html>
-
-
-
-
-
